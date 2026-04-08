@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Imersão Claude — Aprenda IA na prática</title>
+<meta name="description" content="Uma imersão prática para você usar Claude no dia a dia: do primeiro prompt à automação do seu trabalho.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='110' fill='%23F04A1A'/%3E%3Ctext x='256' y='370' font-family='Inter,Arial,sans-serif' font-size='340' font-weight='900' text-anchor='middle' fill='white'%3EC%3C/text%3E%3C/svg%3E">
+<style>
+:root{
+  --bg:#ECE7DD;
+  --bg-soft:#F6F2EA;
+  --card:#DCD6C9;
+  --card-2:#CFC8B8;
+  --accent:#F24E1E;
+  --accent-2:#1A1A1A;
+  --ink:#141414;
+  --ink-2:rgba(20,20,20,.68);
+  --ink-3:rgba(20,20,20,.45);
+  --line:rgba(20,20,20,.12);
+  --font:'Inter',system-ui,sans-serif;
+  --r:14px;
+  --r-sm:8px;
+  --pad:clamp(20px,5vw,48px);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--font);background:var(--bg);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+img{max-width:100%;display:block}
+
+/* HEADER */
+.nav{position:sticky;top:0;z-index:50;background:rgba(236,231,221,.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);padding:0 var(--pad)}
+.nav-in{display:flex;align-items:center;justify-content:space-between;height:64px;max-width:1200px;margin:0 auto}
+.brand{font-size:11px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--ink-3)}
+.brand b{color:var(--accent)}
+.nav-links{display:none;gap:28px}
+.nav-links a{font-size:13px;font-weight:600;color:var(--ink-2);letter-spacing:.3px}
+.nav-links a:hover{color:var(--accent);text-decoration:none}
+.nav-cta{font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;background:var(--accent-2);color:var(--bg);padding:10px 18px;border-radius:100px;transition:transform .15s}
+.nav-cta:hover{transform:translateY(-1px);text-decoration:none}
+@media(min-width:760px){.nav-links{display:flex}}
+
+/* PROGRESS */
+.bar{position:sticky;top:64px;z-index:49;background:var(--bg);padding:0 var(--pad);border-bottom:1px solid var(--line)}
+.bar-in{max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:12px;height:42px}
+.bar-label{font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--ink-3)}
+.bar-track{flex:1;height:3px;background:var(--card);border-radius:3px;overflow:hidden}
+.bar-fill{width:0%;height:100%;background:var(--accent);transition:width .2s}
+
+/* MAIN */
+main{max-width:1200px;margin:0 auto;padding:64px var(--pad) 120px}
+
+/* HERO */
+.hero{display:grid;gap:48px;align-items:center;margin-bottom:120px}
+@media(min-width:900px){.hero{grid-template-columns:1.3fr 1fr}}
+.kicker{display:inline-block;font-size:10px;font-weight:800;letter-spacing:4px;text-transform:uppercase;color:var(--accent);padding:8px 14px;border:1px solid var(--accent);border-radius:100px;margin-bottom:24px}
+.h1{font-size:clamp(42px,8vw,88px);font-weight:900;line-height:.95;letter-spacing:-2px;margin-bottom:24px}
+.h1 em{font-style:normal;color:var(--accent)}
+.lead{font-size:clamp(16px,2.4vw,20px);color:var(--ink-2);max-width:560px;margin-bottom:32px;line-height:1.5}
+.hero-cta{display:flex;gap:12px;flex-wrap:wrap}
+.btn{font-family:var(--font);font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:16px 28px;border-radius:100px;border:none;cursor:pointer;transition:all .2s;display:inline-block}
+.btn-primary{background:var(--accent);color:#fff}
+.btn-primary:hover{background:#d63d10;text-decoration:none;transform:translateY(-2px)}
+.btn-ghost{background:transparent;color:var(--ink);border:1.5px solid var(--ink)}
+.btn-ghost:hover{background:var(--ink);color:var(--bg);text-decoration:none}
+
+.hero-card{background:var(--card);border-radius:var(--r);padding:32px;position:relative;overflow:hidden}
+.hero-card::before{content:"";position:absolute;top:0;left:0;width:6px;height:100%;background:var(--accent)}
+.hero-card h3{font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--ink-3);margin-bottom:20px}
+.hero-card .stat{display:flex;justify-content:space-between;align-items:baseline;padding:14px 0;border-bottom:1px dashed var(--line)}
+.hero-card .stat:last-child{border-bottom:none}
+.hero-card .stat span{font-size:13px;color:var(--ink-2);font-weight:500}
+.hero-card .stat b{font-size:24px;font-weight:900;color:var(--ink)}
+.hero-card ul{list-style:none;padding:0;margin:0 0 22px}
+.hero-card li{display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-bottom:1px dashed var(--line);font-size:14px;color:var(--ink-2);line-height:1.45}
+.hero-card li:last-child{border-bottom:none}
+.hero-card li::before{content:"✓";color:var(--accent);font-weight:900;flex-shrink:0}
+.price-box{background:var(--bg);border-radius:var(--r-sm);padding:18px;margin-top:8px}
+.price-old{font-size:13px;color:var(--ink-3);text-decoration:line-through;margin-bottom:2px}
+.price-now{display:flex;align-items:baseline;gap:8px;margin-bottom:4px}
+.price-now b{font-size:34px;font-weight:900;color:var(--accent);letter-spacing:-1px}
+.price-now span{font-size:13px;color:var(--ink-2);font-weight:600}
+.price-note{font-size:11px;color:var(--ink-3);font-weight:600;letter-spacing:.3px}
+
+/* VAGAS */
+.vagas{margin-top:20px}
+.vagas-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px}
+.vagas-head span{font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink-3)}
+.vagas-head b{font-size:13px;font-weight:800;color:var(--ink)}
+.vagas-track{height:12px;background:var(--bg);border-radius:100px;overflow:hidden;position:relative;box-shadow:inset 0 1px 3px rgba(0,0,0,.08)}
+.vagas-fill{height:100%;background:linear-gradient(90deg,var(--accent),#ff7a47,var(--accent));background-size:200% 100%;border-radius:100px;width:0%;transition:width 1.6s cubic-bezier(.2,.8,.2,1);position:relative;animation:shimmer 2.5s linear infinite}
+.vagas-fill::after{content:"";position:absolute;top:0;right:0;width:14px;height:100%;background:rgba(255,255,255,.5);filter:blur(4px);animation:pulseDot 1.6s ease-in-out infinite}
+@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+@keyframes pulseDot{0%,100%{opacity:.3;transform:scaleX(1)}50%{opacity:1;transform:scaleX(1.6)}}
+.vagas-note{font-size:11px;color:var(--ink-3);margin-top:10px;font-weight:600;display:flex;align-items:center;gap:6px}
+.vagas-note::before{content:"";width:8px;height:8px;border-radius:50%;background:#22c55e;box-shadow:0 0 0 0 rgba(34,197,94,.7);animation:livePulse 2s ease-out infinite}
+@keyframes livePulse{0%{box-shadow:0 0 0 0 rgba(34,197,94,.7)}70%{box-shadow:0 0 0 8px rgba(34,197,94,0)}100%{box-shadow:0 0 0 0 rgba(34,197,94,0)}}
+.vagas-head b{transition:color .3s}
+.vagas-head b.flash{color:var(--accent)}
+
+/* REVEAL ON SCROLL */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.8,.2,1)}
+.reveal.in{opacity:1;transform:none}
+.reveal-stagger > *{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.8,.2,1)}
+.reveal-stagger.in > *{opacity:1;transform:none}
+.reveal-stagger.in > *:nth-child(1){transition-delay:.05s}
+.reveal-stagger.in > *:nth-child(2){transition-delay:.12s}
+.reveal-stagger.in > *:nth-child(3){transition-delay:.19s}
+.reveal-stagger.in > *:nth-child(4){transition-delay:.26s}
+.reveal-stagger.in > *:nth-child(5){transition-delay:.33s}
+.reveal-stagger.in > *:nth-child(6){transition-delay:.40s}
+.reveal-stagger.in > *:nth-child(7){transition-delay:.47s}
+.reveal-stagger.in > *:nth-child(8){transition-delay:.54s}
+
+/* COUNTDOWN */
+.countdown{display:flex;gap:10px;margin:24px 0 28px;flex-wrap:wrap}
+.cd-box{background:var(--card);border-radius:var(--r-sm);padding:12px 16px;min-width:64px;text-align:center;border:1px solid var(--line)}
+.cd-box b{display:block;font-size:24px;font-weight:900;color:var(--ink);line-height:1;letter-spacing:-1px;font-variant-numeric:tabular-nums}
+.cd-box span{display:block;font-size:9px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink-3);margin-top:6px}
+
+/* MAGNETIC BUTTON */
+.btn{position:relative;overflow:hidden}
+.btn .ripple{position:absolute;border-radius:50%;background:rgba(255,255,255,.5);transform:scale(0);animation:ripple .6s ease-out;pointer-events:none}
+@keyframes ripple{to{transform:scale(4);opacity:0}}
+
+/* NAV ACTIVE */
+.nav-links a{position:relative;transition:color .2s}
+.nav-links a::after{content:"";position:absolute;left:0;right:0;bottom:-22px;height:2px;background:var(--accent);transform:scaleX(0);transition:transform .25s}
+.nav-links a.active{color:var(--accent)}
+.nav-links a.active::after{transform:scaleX(1)}
+
+/* CURSOR GLOW */
+.glow{position:fixed;top:0;left:0;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(242,78,30,.10) 0%,transparent 60%);pointer-events:none;transform:translate(-50%,-50%);z-index:1;transition:opacity .3s;opacity:0;mix-blend-mode:multiply}
+@media(hover:hover){.glow{opacity:1}}
+
+/* SECTIONS */
+section{margin-bottom:120px;scroll-margin-top:120px}
+.s-head{margin-bottom:48px;max-width:720px}
+.s-kicker{font-size:10px;font-weight:800;letter-spacing:4px;text-transform:uppercase;color:var(--accent);margin-bottom:14px}
+.s-title{font-size:clamp(32px,5vw,56px);font-weight:900;line-height:1;letter-spacing:-1.5px;margin-bottom:16px}
+.s-sub{font-size:18px;color:var(--ink-2);line-height:1.5}
+
+/* MODULES */
+.modules{display:grid;gap:16px}
+@media(min-width:700px){.modules{grid-template-columns:repeat(2,1fr)}}
+.mod{background:var(--card);border-radius:var(--r);padding:28px;transition:transform .2s,background .2s;cursor:pointer;border:1px solid transparent}
+.mod:hover{background:var(--card-2);transform:translateY(-3px);border-color:var(--accent)}
+.mod-num{font-size:11px;font-weight:800;letter-spacing:2px;color:var(--accent);margin-bottom:14px}
+.mod-title{font-size:20px;font-weight:800;line-height:1.2;margin-bottom:10px;letter-spacing:-.3px}
+.mod-desc{font-size:14px;color:var(--ink-2);line-height:1.55;margin-bottom:18px}
+.mod-tags{display:flex;gap:6px;flex-wrap:wrap}
+.tag{font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;background:var(--bg);color:var(--ink-2);padding:5px 10px;border-radius:100px}
+
+/* WHO */
+.who{display:grid;gap:14px}
+@media(min-width:700px){.who{grid-template-columns:repeat(3,1fr)}}
+.who-card{background:var(--bg-soft);border:1px solid var(--line);border-radius:var(--r);padding:28px}
+.who-card .ico{width:42px;height:42px;border-radius:10px;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:18px;margin-bottom:18px}
+.who-card h4{font-size:17px;font-weight:800;margin-bottom:8px}
+.who-card p{font-size:14px;color:var(--ink-2);line-height:1.55}
+
+/* FAQ */
+.faq details{background:var(--card);border-radius:var(--r);margin-bottom:10px;overflow:hidden}
+.faq summary{padding:20px 24px;font-weight:700;font-size:15px;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:16px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-size:22px;color:var(--accent);font-weight:400;transition:transform .2s}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq .answer{padding:0 24px 22px;font-size:14px;color:var(--ink-2);line-height:1.65}
+
+/* CTA FINAL */
+.final{background:var(--ink);color:var(--bg);border-radius:var(--r);padding:clamp(40px,6vw,72px);text-align:center;margin-bottom:60px}
+.final h2{font-size:clamp(28px,5vw,48px);font-weight:900;line-height:1.05;letter-spacing:-1px;margin-bottom:16px}
+.final h2 em{font-style:normal;color:var(--accent)}
+.final p{font-size:16px;color:rgba(236,231,221,.7);max-width:480px;margin:0 auto 28px}
+.final .btn-primary{background:var(--accent);color:#fff}
+
+/* FOOTER */
+footer{padding:40px var(--pad);border-top:1px solid var(--line);text-align:center;font-size:12px;color:var(--ink-3);letter-spacing:.5px}
+footer b{color:var(--accent)}
+</style>
+</head>
+<body>
+
+<div class="glow" id="glow"></div>
+
+<nav class="nav">
+  <div class="nav-in">
+    <div class="brand">IMERSÃO <b>CLAUDE</b></div>
+    <div class="nav-links">
+      <a href="#sobre">Sobre</a>
+      <a href="#modulos">Módulos</a>
+      <a href="#publico">Para quem</a>
+      <a href="#faq">FAQ</a>
+    </div>
+    <a href="#inscricao" class="nav-cta">Quero entrar</a>
+  </div>
+</nav>
+
+<div class="bar">
+  <div class="bar-in">
+    <span class="bar-label">Progresso</span>
+    <div class="bar-track"><div class="bar-fill" id="bar"></div></div>
+  </div>
+</div>
+
+<main>
+
+  <section class="hero" id="sobre">
+    <div>
+      <span class="kicker">Workshop I.A na prática · 13/04</span>
+      <h1 class="h1">Faça da IA o seu <em>copiloto real</em> de trabalho.</h1>
+      <p class="lead">Uma aula ao vivo mão na massa pra você sair usando Claude com confiança — do primeiro prompt até automatizar o que hoje rouba o seu tempo.</p>
+      <div class="countdown" id="countdown">
+        <div class="cd-box"><b id="cdD">--</b><span>Dias</span></div>
+        <div class="cd-box"><b id="cdH">--</b><span>Horas</span></div>
+        <div class="cd-box"><b id="cdM">--</b><span>Min</span></div>
+        <div class="cd-box"><b id="cdS">--</b><span>Seg</span></div>
+      </div>
+      <div class="hero-cta">
+        <a href="https://pay.kiwify.com.br/9z7AF2U" class="btn btn-primary">Garantir minha vaga</a>
+        <a href="#modulos" class="btn btn-ghost">Ver programa</a>
+      </div>
+    </div>
+    <div class="hero-card">
+      <h3>O que você leva</h3>
+      <ul>
+        <li>Encontro ao vivo 100% prático</li>
+        <li>Acesso a Skills (criação de conteúdo, planilhas e muito mais)</li>
+        <li>Acesso à gravação por 12 meses</li>
+      </ul>
+      <div class="price-box">
+        <div class="price-old">De R$ 297</div>
+        <div class="price-now"><b>R$ 100</b><span>à vista</span></div>
+        <div class="price-note">Condição exclusiva desta turma</div>
+      </div>
+      <div class="vagas" id="vagas">
+        <div class="vagas-head"><span>Vagas preenchidas</span><b id="vagasCount">0 / 30</b></div>
+        <div class="vagas-track"><div class="vagas-fill" id="vagasFill"></div></div>
+        <div class="vagas-note" id="vagasNote">Restam 25 vagas — não fica pra última hora</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="modulos">
+    <div class="s-head reveal">
+      <div class="s-kicker">Temas da aula</div>
+      <h2 class="s-title">O que será abordado.</h2>
+      <p class="s-sub">Tudo aplicado ao vivo, com exemplos reais pra você reproduzir no seu próprio trabalho — não em exercício de aula.</p>
+    </div>
+    <div class="modules reveal-stagger">
+      <div class="mod">
+        <div class="mod-num">TEMA 01</div>
+        <div class="mod-title">Primeiros contatos com Claude</div>
+        <div class="mod-desc">Como conversar com a IA pra ela entender de verdade o que você quer.</div>
+        <div class="mod-tags"><span class="tag">Fundamentos</span><span class="tag">Prompt</span></div>
+      </div>
+      <div class="mod">
+        <div class="mod-num">TEMA 02</div>
+        <div class="mod-title">Organize sua rotina com IA</div>
+        <div class="mod-desc">Construa um sistema pessoal pra capturar ideias, tarefas e decisões sem perder nada.</div>
+        <div class="mod-tags"><span class="tag">Produtividade</span><span class="tag">GTD</span></div>
+      </div>
+      <div class="mod">
+        <div class="mod-num">TEMA 03</div>
+        <div class="mod-title">Pesquise como um analista</div>
+        <div class="mod-desc">Use Claude pra investigar mercados, comparar opções e tirar conclusões em minutos.</div>
+        <div class="mod-tags"><span class="tag">Pesquisa</span></div>
+      </div>
+      <div class="mod">
+        <div class="mod-num">TEMA 04</div>
+        <div class="mod-title">Escreva mais e melhor</div>
+        <div class="mod-desc">Do e-mail difícil ao artigo longo, com a sua voz preservada — não a voz robô da IA.</div>
+        <div class="mod-tags"><span class="tag">Escrita</span></div>
+      </div>
+      <div class="mod">
+        <div class="mod-num">TEMA 05</div>
+        <div class="mod-title">Crie no terminal</div>
+        <div class="mod-desc">Instale o Claude Code, configure o ambiente e construa seu primeiro mini-projeto.</div>
+        <div class="mod-tags"><span class="tag">Terminal</span><span class="tag">Setup</span></div>
+      </div>
+      <div class="mod">
+        <div class="mod-num">TEMA 06</div>
+        <div class="mod-title">Automatize tarefas chatas</div>
+        <div class="mod-desc">Conecte planilhas, e-mails e calendários pra a IA cuidar do operacional por você.</div>
+        <div class="mod-tags"><span class="tag">Automação</span></div>
+      </div>
+      <div class="mod">
+        <div class="mod-num">TEMA 07</div>
+        <div class="mod-title">Skills do seu jeito</div>
+        <div class="mod-desc">Empacote seus métodos pessoais como Skills reutilizáveis — uma vez feito, pra sempre usado.</div>
+        <div class="mod-tags"><span class="tag">Skills</span><span class="tag">Avançado</span></div>
+      </div>
+      <div class="mod">
+        <div class="mod-num">TEMA 08</div>
+        <div class="mod-title">Próximos passos</div>
+        <div class="mod-desc">Plano pessoal pra você continuar evoluindo depois que a imersão acabar.</div>
+        <div class="mod-tags"><span class="tag">Plano</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="publico">
+    <div class="s-head reveal">
+      <div class="s-kicker">Para quem</div>
+      <h2 class="s-title">Pensada pra quem quer aplicar, não decorar.</h2>
+    </div>
+    <div class="who reveal-stagger">
+      <div class="who-card">
+        <div class="ico">A</div>
+        <h4>Profissionais ocupados</h4>
+        <p>Quer terceirizar pra IA o que rouba seu tempo e voltar a focar no que importa.</p>
+      </div>
+      <div class="who-card">
+        <div class="ico">B</div>
+        <h4>Empreendedores</h4>
+        <p>Precisa fazer mais com menos gente — IA como a equipe que você ainda não tem.</p>
+      </div>
+      <div class="who-card">
+        <div class="ico">C</div>
+        <h4>Curiosos com pressa</h4>
+        <p>Já tentou ChatGPT, achou legal, mas nunca passou disso. Aqui você sai usando.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq" class="faq">
+    <div class="s-head reveal">
+      <div class="s-kicker">Dúvidas</div>
+      <h2 class="s-title">O que costumam perguntar.</h2>
+    </div>
+    <details><summary>Preciso saber programar?</summary><div class="answer">Não. Os módulos básicos não exigem código nenhum. Os módulos de terminal e Skills mostram tudo do zero.</div></details>
+    <details><summary>Os encontros são gravados?</summary><div class="answer">Sim. Mesmo se faltar, você assiste depois com calma — mas a recomendação é estar ao vivo pra tirar dúvidas.</div></details>
+    <details><summary>Funciona com a versão gratuita do Claude?</summary><div class="answer">Funciona pra maior parte dos exercícios. Alguns módulos avançados ficam melhores no plano pago, mas é opcional.</div></details>
+    <details><summary>Quanto tempo dura?</summary><div class="answer">Entre 1h30 e 2h ao vivo, mais material complementar pra você praticar depois do workshop.</div></details>
+  </section>
+
+  <section id="inscricao">
+    <div class="final">
+      <h2>Pronto pra trabalhar com <em>Claude do seu lado?</em></h2>
+      <p>Workshop dia 13/04 · 30 vagas · R$ 100 (de R$ 297)</p>
+      <a href="https://pay.kiwify.com.br/9z7AF2U" class="btn btn-primary">Garantir minha vaga</a>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  @olucaslopesc — <b>Imersão Claude</b> · Todos os direitos reservados
+</footer>
+
+<script>
+  const bar=document.getElementById('bar');
+  const onScroll=()=>{
+    const h=document.documentElement;
+    const p=(h.scrollTop)/(h.scrollHeight-h.clientHeight)*100;
+    bar.style.width=p+'%';
+  };
+  document.addEventListener('scroll',onScroll,{passive:true});
+  onScroll();
+
+  // VAGAS — animação de contagem + barra
+  const TOTAL = 30;
+  let vagas = 5;
+  const fill = document.getElementById('vagasFill');
+  const count = document.getElementById('vagasCount');
+  const note = document.getElementById('vagasNote');
+  const vagasBox = document.getElementById('vagas');
+
+  function renderVagas(target, animate=true){
+    const pct = (target/TOTAL)*100;
+    fill.style.width = pct+'%';
+    const restantes = TOTAL - target;
+    note.textContent = `Restam ${restantes} vagas — não fica pra última hora`;
+    // count up
+    const start = parseInt(count.dataset.cur||'0',10);
+    const dur = animate?900:0;
+    const t0 = performance.now();
+    function step(now){
+      const p = Math.min((now-t0)/dur,1);
+      const ease = 1-Math.pow(1-p,3);
+      const v = Math.round(start+(target-start)*ease);
+      count.textContent = `${v} / ${TOTAL}`;
+      if(p<1) requestAnimationFrame(step);
+      else { count.dataset.cur = target; }
+    }
+    if(dur>0) requestAnimationFrame(step);
+    else { count.textContent=`${target} / ${TOTAL}`; count.dataset.cur=target; }
+  }
+
+  // anima quando entra na viewport
+  let triggered = false;
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting && !triggered){
+        triggered = true;
+        renderVagas(vagas);
+      }
+    });
+  },{threshold:.4});
+  io.observe(vagasBox);
+
+  // REVEAL ON SCROLL
+  const revealEls = document.querySelectorAll('.reveal, .reveal-stagger');
+  const revealIO = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){ e.target.classList.add('in'); revealIO.unobserve(e.target); }
+    });
+  },{threshold:.12});
+  revealEls.forEach(el=>revealIO.observe(el));
+
+  // COUNTDOWN para 13/04 09:00
+  const target = new Date(new Date().getFullYear(),3,13,9,0,0).getTime();
+  const cdD=document.getElementById('cdD'),cdH=document.getElementById('cdH'),cdM=document.getElementById('cdM'),cdS=document.getElementById('cdS');
+  function tick(){
+    const diff = target - Date.now();
+    if(diff<=0){ cdD.textContent=cdH.textContent=cdM.textContent=cdS.textContent='00'; return; }
+    const d=Math.floor(diff/86400000),h=Math.floor(diff%86400000/3600000),m=Math.floor(diff%3600000/60000),s=Math.floor(diff%60000/1000);
+    cdD.textContent=String(d).padStart(2,'0');
+    cdH.textContent=String(h).padStart(2,'0');
+    cdM.textContent=String(m).padStart(2,'0');
+    cdS.textContent=String(s).padStart(2,'0');
+  }
+  tick(); setInterval(tick,1000);
+
+  // RIPPLE em botões
+  document.querySelectorAll('.btn').forEach(btn=>{
+    btn.addEventListener('click',function(e){
+      const r=document.createElement('span');
+      r.className='ripple';
+      const rect=this.getBoundingClientRect();
+      const size=Math.max(rect.width,rect.height);
+      r.style.width=r.style.height=size+'px';
+      r.style.left=(e.clientX-rect.left-size/2)+'px';
+      r.style.top=(e.clientY-rect.top-size/2)+'px';
+      this.appendChild(r);
+      setTimeout(()=>r.remove(),600);
+    });
+  });
+
+  // NAV ACTIVE conforme scroll
+  const navLinks = document.querySelectorAll('.nav-links a');
+  const sections = ['sobre','modulos','publico','faq'].map(id=>document.getElementById(id));
+  const navIO = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        const id=e.target.id;
+        navLinks.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+id));
+      }
+    });
+  },{rootMargin:'-40% 0px -55% 0px'});
+  sections.forEach(s=>s&&navIO.observe(s));
+
+  // CURSOR GLOW
+  const glow=document.getElementById('glow');
+  document.addEventListener('mousemove',(e)=>{
+    glow.style.left=e.clientX+'px';
+    glow.style.top=e.clientY+'px';
+  });
+
+  // TILT nos cards de módulo
+  document.querySelectorAll('.mod').forEach(card=>{
+    card.addEventListener('mousemove',(e)=>{
+      const r=card.getBoundingClientRect();
+      const x=(e.clientX-r.left)/r.width-.5;
+      const y=(e.clientY-r.top)/r.height-.5;
+      card.style.transform=`translateY(-3px) rotateX(${-y*4}deg) rotateY(${x*4}deg)`;
+    });
+    card.addEventListener('mouseleave',()=>{ card.style.transform=''; });
+  });
+
+  // simula nova inscrição de tempos em tempos (efeito "ao vivo")
+  setInterval(()=>{
+    if(vagas < TOTAL && Math.random() > 0.55){
+      vagas++;
+      count.classList.add('flash');
+      renderVagas(vagas);
+      setTimeout(()=>count.classList.remove('flash'),600);
+    }
+  }, 12000);
+</script>
+
+</body>
+</html>
