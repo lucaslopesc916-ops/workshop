@@ -164,6 +164,24 @@ section{margin-bottom:120px;scroll-margin-top:120px}
 .who-card h4{font-size:17px;font-weight:800;margin-bottom:8px}
 .who-card p{font-size:14px;color:var(--ink-2);line-height:1.55}
 
+/* PROVA SOCIAL */
+.nps-grid{display:grid;gap:14px;margin-bottom:48px}
+@media(min-width:700px){.nps-grid{grid-template-columns:repeat(4,1fr)}}
+.nps-card{background:var(--card);border-radius:var(--r);padding:24px;text-align:center;border:1px solid var(--line)}
+.nps-card b{display:block;font-size:42px;font-weight:900;color:var(--accent);line-height:1;letter-spacing:-1.5px;margin-bottom:6px;font-variant-numeric:tabular-nums}
+.nps-card span{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink-3)}
+.depos{display:grid;gap:14px}
+@media(min-width:700px){.depos{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1000px){.depos{grid-template-columns:repeat(3,1fr)}}
+.depo{background:var(--bg-soft);border:1px solid var(--line);border-radius:var(--r);padding:24px;display:flex;flex-direction:column;gap:14px}
+.depo-quote{font-size:14px;color:var(--ink);line-height:1.55;font-weight:500;flex:1}
+.depo-quote::before{content:"\201C";color:var(--accent);font-size:32px;font-weight:900;line-height:0;vertical-align:-12px;margin-right:4px}
+.depo-author{display:flex;align-items:center;gap:12px;padding-top:12px;border-top:1px solid var(--line)}
+.depo-avatar{width:38px;height:38px;border-radius:50%;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:14px;flex-shrink:0}
+.depo-info b{display:block;font-size:13px;font-weight:800;color:var(--ink)}
+.depo-info span{font-size:11px;color:var(--ink-3);font-weight:600}
+.depo-stars{color:var(--accent);font-size:13px;letter-spacing:1px}
+
 /* FAQ */
 .faq details{background:var(--card);border-radius:var(--r);margin-bottom:10px;overflow:hidden}
 .faq summary{padding:20px 24px;font-weight:700;font-size:15px;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:16px}
@@ -194,6 +212,7 @@ footer b{color:var(--accent)}
     <div class="nav-links">
       <a href="#sobre">Sobre</a>
       <a href="#modulos">Módulos</a>
+      <a href="#depoimentos">Depoimentos</a>
       <a href="#publico">Para quem</a>
       <a href="#faq">FAQ</a>
     </div>
@@ -242,6 +261,70 @@ footer b{color:var(--accent)}
         <div class="vagas-head"><span>Vagas preenchidas</span><b id="vagasCount">0 / 30</b></div>
         <div class="vagas-track"><div class="vagas-fill" id="vagasFill"></div></div>
         <div class="vagas-note" id="vagasNote">Restam 25 vagas — não fica pra última hora</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="depoimentos">
+    <div class="s-head reveal">
+      <div class="s-kicker">Prova social</div>
+      <h2 class="s-title">Nota NPS 94 entre participantes.</h2>
+      <p class="s-sub">Média de qualidade 9.8/10 nas avaliações. 94% dos alunos são promotores da imersão.</p>
+    </div>
+    <div class="nps-grid reveal-stagger">
+      <div class="nps-card"><b>94</b><span>NPS Score</span></div>
+      <div class="nps-card"><b>9.8</b><span>Qualidade</span></div>
+      <div class="nps-card"><b>94%</b><span>Promotores</span></div>
+      <div class="nps-card"><b>17</b><span>Respostas</span></div>
+    </div>
+    <div class="depos reveal-stagger">
+      <div class="depo">
+        <p class="depo-quote">Esse workshop me trouxe pra luz e abriu minha cabeça com relação a infinitas possibilidades com essas ferramentas de IA.</p>
+        <div class="depo-stars">★★★★★</div>
+        <div class="depo-author">
+          <div class="depo-avatar">B</div>
+          <div class="depo-info"><b>Bruno Stefan de Macedo Moura</b><span>Workshop I.A</span></div>
+        </div>
+      </div>
+      <div class="depo">
+        <p class="depo-quote">Boa didática, conteúdo prático e direto ao ponto.</p>
+        <div class="depo-stars">★★★★★</div>
+        <div class="depo-author">
+          <div class="depo-avatar">J</div>
+          <div class="depo-info"><b>Jair</b><span>TI Automação e IA</span></div>
+        </div>
+      </div>
+      <div class="depo">
+        <p class="depo-quote">Muito bom esse formato que permite a participação.</p>
+        <div class="depo-stars">★★★★★</div>
+        <div class="depo-author">
+          <div class="depo-avatar">R</div>
+          <div class="depo-info"><b>Rafael Kummer</b><span>Escritório de Advocacia</span></div>
+        </div>
+      </div>
+      <div class="depo">
+        <p class="depo-quote">Muito conteúdo e entrega. Bastante conhecimento do mentor também.</p>
+        <div class="depo-stars">★★★★★</div>
+        <div class="depo-author">
+          <div class="depo-avatar">S</div>
+          <div class="depo-info"><b>Saulo Bulhões e Silva</b><span>Mentoria</span></div>
+        </div>
+      </div>
+      <div class="depo">
+        <p class="depo-quote">Muito bom, muita clareza no conteúdo.</p>
+        <div class="depo-stars">★★★★★</div>
+        <div class="depo-author">
+          <div class="depo-avatar">R</div>
+          <div class="depo-info"><b>Rafael Rafiuski</b><span>Workshop I.A</span></div>
+        </div>
+      </div>
+      <div class="depo">
+        <p class="depo-quote">Bem prático. Excelente workshop.</p>
+        <div class="depo-stars">★★★★★</div>
+        <div class="depo-author">
+          <div class="depo-avatar">M</div>
+          <div class="depo-info"><b>Marina Lemos</b><span>Anti Fake Club</span></div>
+        </div>
       </div>
     </div>
   </section>
