@@ -224,6 +224,55 @@ section{margin-bottom:120px;scroll-margin-top:120px}
 footer{padding:40px var(--pad);border-top:1px solid var(--line);text-align:center;font-size:12px;color:var(--ink-3);letter-spacing:.5px}
 footer b{color:var(--accent)}
 
+/* CAMINHO (steps) */
+.steps{display:grid;gap:20px;counter-reset:step}
+@media(min-width:700px){.steps{grid-template-columns:repeat(3,1fr)}}
+.step{background:var(--card);border-radius:var(--r);padding:32px;position:relative;counter-increment:step}
+.step::before{content:counter(step,decimal-leading-zero);font-family:var(--font-display);font-size:48px;font-weight:700;color:var(--accent);opacity:.25;line-height:1;margin-bottom:12px;display:block}
+.step h4{font-size:17px;font-weight:800;margin-bottom:8px}
+.step p{font-size:14px;color:var(--ink-2);line-height:1.55}
+.step-arrow{display:none}
+@media(min-width:700px){.steps{position:relative}}
+
+/* CRONOGRAMA */
+.timeline{max-width:640px}
+.tl-item{display:flex;gap:20px;padding:20px 0;border-bottom:1px solid var(--line)}
+.tl-item:last-child{border-bottom:none}
+.tl-time{font-size:13px;font-weight:800;color:var(--accent);min-width:70px;padding-top:2px}
+.tl-content h4{font-size:15px;font-weight:700;margin-bottom:4px}
+.tl-content p{font-size:13px;color:var(--ink-2);line-height:1.5}
+
+/* PREÇO (standalone) */
+.pricing{max-width:520px;margin:0 auto}
+.pricing-card{background:var(--card);border-radius:var(--r);padding:40px;position:relative;overflow:hidden;border:2px solid var(--accent)}
+.pricing-card::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:var(--accent)}
+.pricing-card .price-badge{display:inline-block;font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;background:var(--accent);color:#fff;padding:6px 14px;border-radius:100px;margin-bottom:24px}
+.pricing-card ul{list-style:none;margin:0 0 24px}
+.pricing-card li{display:flex;gap:10px;align-items:flex-start;padding:10px 0;border-bottom:1px dashed var(--line);font-size:14px;color:var(--ink-2);line-height:1.45}
+.pricing-card li:last-child{border-bottom:none}
+.pricing-card li::before{content:"✓";color:var(--accent);font-weight:900;flex-shrink:0}
+
+/* SOBRE (mentor) */
+.mentor{display:grid;gap:40px;align-items:center}
+@media(min-width:700px){.mentor{grid-template-columns:auto 1fr}}
+.mentor-avatar{width:120px;height:120px;border-radius:50%;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:48px;flex-shrink:0}
+.mentor-bio p{font-size:15px;color:var(--ink-2);line-height:1.65;margin-bottom:12px}
+.mentor-bio p:last-child{margin-bottom:0}
+.mentor-bio b{color:var(--ink);font-weight:700}
+
+/* GARANTIA */
+.garantia-box{background:var(--card);border-radius:var(--r);padding:40px;display:flex;gap:24px;align-items:flex-start;max-width:720px;border:1px solid var(--line)}
+.garantia-icon{font-size:48px;flex-shrink:0;line-height:1}
+.garantia-box h3{font-size:20px;font-weight:800;margin-bottom:10px}
+.garantia-box p{font-size:14px;color:var(--ink-2);line-height:1.6}
+@media(max-width:520px){.garantia-box{flex-direction:column}}
+
+/* CERTIFICADO */
+.cert-box{background:var(--bg-soft);border:2px dashed var(--line);border-radius:var(--r);padding:48px;text-align:center;max-width:600px;margin:0 auto}
+.cert-box .cert-icon{font-size:56px;margin-bottom:16px;line-height:1}
+.cert-box h3{font-size:20px;font-weight:800;margin-bottom:10px}
+.cert-box p{font-size:14px;color:var(--ink-2);line-height:1.6;max-width:420px;margin:0 auto}
+
 /* ===== GRAIN TEXTURE ===== */
 body::before{content:"";position:fixed;top:-50%;left:-50%;width:200%;height:200%;pointer-events:none;z-index:9999;opacity:.06;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-repeat:repeat;background-size:256px}
 
@@ -303,10 +352,10 @@ body::before{content:"";position:fixed;top:-50%;left:-50%;width:200%;height:200%
   <div class="nav-in">
     <div class="brand">IMERSÃO <b>CLAUDE</b></div>
     <div class="nav-links">
-      <a href="#sobre">Sobre</a>
-      <a href="#modulos">Módulos</a>
+      <a href="#promessa">Sobre</a>
+      <a href="#conteudo">Conteúdo</a>
       <a href="#depoimentos">Depoimentos</a>
-      <a href="#publico">Para quem</a>
+      <a href="#preco">Preço</a>
       <a href="#faq">FAQ</a>
     </div>
     <a href="#inscricao" class="nav-cta">Quero entrar</a>
@@ -322,7 +371,8 @@ body::before{content:"";position:fixed;top:-50%;left:-50%;width:200%;height:200%
 
 <main>
 
-  <section class="hero" id="sobre">
+  <!-- 1. PROMESSA -->
+  <section class="hero" id="promessa">
     <div>
       <span class="kicker">Workshop I.A na prática · 13/04</span>
       <h1 class="h1">Aprenda a usar o Claude para automatizar relatórios, planilhas e criação de conteúdo em menos de <em>2 horas.</em></h1>
@@ -335,7 +385,7 @@ body::before{content:"";position:fixed;top:-50%;left:-50%;width:200%;height:200%
       </div>
       <div class="hero-cta">
         <a href="https://pay.kiwify.com.br/9z7AF2U" class="btn btn-primary">Garantir minha vaga</a>
-        <a href="#modulos" class="btn btn-ghost">Ver programa</a>
+        <a href="#conteudo" class="btn btn-ghost">Ver programa</a>
       </div>
     </div>
     <div class="hero-card">
@@ -344,16 +394,8 @@ body::before{content:"";position:fixed;top:-50%;left:-50%;width:200%;height:200%
         <li>Encontro ao vivo 100% prático</li>
         <li>Acesso a Skills (criação de conteúdo, planilhas e muito mais)</li>
         <li>Acesso à gravação por 12 meses</li>
+        <li>Certificado de participação</li>
       </ul>
-      <div class="price-box">
-        <div class="price-old">De R$ 297</div>
-        <div class="price-now"><b>R$ 100</b><span>à vista</span></div>
-        <div class="price-note">ou 12x de R$ 10,34 · Condição exclusiva desta turma</div>
-      </div>
-      <div class="bonus">
-        <span class="bonus-tag">Bônus</span>
-        <div class="bonus-text">Acesso <b>imediato</b> à gravação do workshop do dia <b>06/04</b> — já comece a se preparar pra aula ao vivo de <b>13/04</b>.</div>
-      </div>
       <div class="vagas" id="vagas">
         <div class="vagas-head"><span>Vagas preenchidas</span><b id="vagasCount">0 / 25</b></div>
         <div class="vagas-track"><div class="vagas-fill" id="vagasFill"></div></div>
@@ -362,6 +404,166 @@ body::before{content:"";position:fixed;top:-50%;left:-50%;width:200%;height:200%
     </div>
   </section>
 
+  <!-- 2. CAMINHO -->
+  <section id="caminho">
+    <div class="s-head reveal">
+      <div class="s-kicker">O caminho</div>
+      <h2 class="s-title">Do zero ao resultado em 3 passos.</h2>
+      <p class="s-sub">Sem enrolação. Você entra sem saber nada de IA e sai automatizando o seu trabalho.</p>
+    </div>
+    <div class="steps reveal-stagger">
+      <div class="step">
+        <h4>Assista ao vivo</h4>
+        <p>Workshop mão na massa no dia 13/04. Tudo ao vivo, com espaço pra tirar dúvidas em tempo real.</p>
+      </div>
+      <div class="step">
+        <h4>Aplique no seu trabalho</h4>
+        <p>Cada módulo tem exemplos reais pra você reproduzir direto na sua rotina — não em exercício fictício.</p>
+      </div>
+      <div class="step">
+        <h4>Automatize e escale</h4>
+        <p>Saia com Skills, automações e um plano claro pra continuar evoluindo depois da aula.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. IDENTIFICAÇÃO -->
+  <section id="publico">
+    <div class="s-head reveal">
+      <div class="s-kicker">Para quem</div>
+      <h2 class="s-title">Pensada pra quem quer aplicar, não decorar.</h2>
+    </div>
+    <div class="who reveal-stagger">
+      <div class="who-card">
+        <div class="ico">A</div>
+        <h4>Profissionais ocupados</h4>
+        <p>Quer terceirizar pra IA o que rouba seu tempo e voltar a focar no que importa.</p>
+      </div>
+      <div class="who-card">
+        <div class="ico">B</div>
+        <h4>Empreendedores</h4>
+        <p>Precisa fazer mais com menos gente — IA como a equipe que você ainda não tem.</p>
+      </div>
+      <div class="who-card">
+        <div class="ico">C</div>
+        <h4>Curiosos com pressa</h4>
+        <p>Já tentou ChatGPT, achou legal, mas nunca passou disso. Aqui você sai usando.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. CONTEÚDO EVENTO -->
+  <section id="conteudo">
+    <div class="s-head reveal">
+      <div class="s-kicker">Conteúdo do workshop</div>
+      <h2 class="s-title">O que será abordado.</h2>
+      <p class="s-sub">Tudo aplicado ao vivo, com exemplos reais pra você reproduzir no seu próprio trabalho — não em exercício de aula.</p>
+    </div>
+    <div class="modules reveal-stagger">
+      <div class="mod">
+        <div class="mod-num">TEMA 01</div>
+        <div class="mod-title">Primeiros contatos com Claude</div>
+        <div class="mod-desc">Como conversar com a IA pra ela entender de verdade o que você quer.</div>
+        <div class="mod-tags"><span class="tag">Fundamentos</span><span class="tag">Prompt</span></div>
+      </div>
+      <div class="mod">
+        <div class="mod-num">TEMA 02</div>
+        <div class="mod-title">Organize sua rotina com IA</div>
+        <div class="mod-desc">Construa um sistema pessoal pra capturar ideias, tarefas e decisões sem perder nada.</div>
+        <div class="mod-tags"><span class="tag">Produtividade</span><span class="tag">GTD</span></div>
+      </div>
+      <div class="mod">
+        <div class="mod-num">TEMA 03</div>
+        <div class="mod-title">Pesquise como um analista</div>
+        <div class="mod-desc">Use Claude pra investigar mercados, comparar opções e tirar conclusões em minutos.</div>
+        <div class="mod-tags"><span class="tag">Pesquisa</span></div>
+      </div>
+      <div class="mod">
+        <div class="mod-num">TEMA 04</div>
+        <div class="mod-title">Escreva mais e melhor</div>
+        <div class="mod-desc">Do e-mail difícil ao artigo longo, com a sua voz preservada — não a voz robô da IA.</div>
+        <div class="mod-tags"><span class="tag">Escrita</span></div>
+      </div>
+      <div class="mod">
+        <div class="mod-num">TEMA 05</div>
+        <div class="mod-title">Crie no terminal</div>
+        <div class="mod-desc">Instale o Claude Code, configure o ambiente e construa seu primeiro mini-projeto.</div>
+        <div class="mod-tags"><span class="tag">Terminal</span><span class="tag">Setup</span></div>
+      </div>
+      <div class="mod">
+        <div class="mod-num">TEMA 06</div>
+        <div class="mod-title">Automatize tarefas chatas</div>
+        <div class="mod-desc">Conecte planilhas, e-mails e calendários pra a IA cuidar do operacional por você.</div>
+        <div class="mod-tags"><span class="tag">Automação</span></div>
+      </div>
+      <div class="mod">
+        <div class="mod-num">TEMA 07</div>
+        <div class="mod-title">Skills do seu jeito</div>
+        <div class="mod-desc">Empacote seus métodos pessoais como Skills reutilizáveis — uma vez feito, pra sempre usado.</div>
+        <div class="mod-tags"><span class="tag">Skills</span><span class="tag">Avançado</span></div>
+      </div>
+      <div class="mod">
+        <div class="mod-num">TEMA 08</div>
+        <div class="mod-title">Próximos passos</div>
+        <div class="mod-desc">Plano pessoal pra você continuar evoluindo depois que a imersão acabar.</div>
+        <div class="mod-tags"><span class="tag">Plano</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. CRONOGRAMA -->
+  <section id="cronograma">
+    <div class="s-head reveal">
+      <div class="s-kicker">Cronograma</div>
+      <h2 class="s-title">Como vai funcionar o dia.</h2>
+    </div>
+    <div class="timeline reveal">
+      <div class="tl-item">
+        <div class="tl-time">19:00</div>
+        <div class="tl-content">
+          <h4>Abertura e boas-vindas</h4>
+          <p>Apresentação, alinhamento de expectativas e setup do ambiente.</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-time">19:15</div>
+        <div class="tl-content">
+          <h4>Claude, Claude Code e Cowork</h4>
+          <p>Explicação completa das ferramentas: o que cada uma faz, quando usar e como tirar o máximo de cada uma.</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-time">19:45</div>
+        <div class="tl-content">
+          <h4>Automações na prática</h4>
+          <p>Planilhas, relatórios, e-mails, conteúdo e Skills — a IA cuidando do operacional por você.</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-time">20:15</div>
+        <div class="tl-content">
+          <h4>Skills + encerramento</h4>
+          <p>Crie Skills reutilizáveis, plano pessoal e próximos passos.</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-time">20:30</div>
+        <div class="tl-content">
+          <h4>Encerramento</h4>
+          <p>Considerações finais e fechamento do workshop.</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-time">20:30 - 21:00</div>
+        <div class="tl-content">
+          <h4>Dúvidas</h4>
+          <p>Espaço aberto para perguntas e respostas ao vivo.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. CASES IMAGEM (depoimentos) -->
   <section id="depoimentos" class="band band--dark">
     <div class="s-head reveal">
       <div class="s-kicker">Prova social</div>
@@ -426,88 +628,80 @@ body::before{content:"";position:fixed;top:-50%;left:-50%;width:200%;height:200%
     </div>
   </section>
 
-  <section id="modulos">
-    <div class="s-head reveal">
-      <div class="s-kicker">Temas da aula</div>
-      <h2 class="s-title">O que será abordado.</h2>
-      <p class="s-sub">Tudo aplicado ao vivo, com exemplos reais pra você reproduzir no seu próprio trabalho — não em exercício de aula.</p>
+  <!-- 7. PREÇO -->
+  <section id="preco">
+    <div class="s-head reveal" style="text-align:center;margin-left:auto;margin-right:auto">
+      <div class="s-kicker">Investimento</div>
+      <h2 class="s-title">Uma decisão que se paga no primeiro uso.</h2>
     </div>
-    <div class="modules reveal-stagger">
-      <div class="mod">
-        <div class="mod-num">TEMA 01</div>
-        <div class="mod-title">Primeiros contatos com Claude</div>
-        <div class="mod-desc">Como conversar com a IA pra ela entender de verdade o que você quer.</div>
-        <div class="mod-tags"><span class="tag">Fundamentos</span><span class="tag">Prompt</span></div>
-      </div>
-      <div class="mod">
-        <div class="mod-num">TEMA 02</div>
-        <div class="mod-title">Organize sua rotina com IA</div>
-        <div class="mod-desc">Construa um sistema pessoal pra capturar ideias, tarefas e decisões sem perder nada.</div>
-        <div class="mod-tags"><span class="tag">Produtividade</span><span class="tag">GTD</span></div>
-      </div>
-      <div class="mod">
-        <div class="mod-num">TEMA 03</div>
-        <div class="mod-title">Pesquise como um analista</div>
-        <div class="mod-desc">Use Claude pra investigar mercados, comparar opções e tirar conclusões em minutos.</div>
-        <div class="mod-tags"><span class="tag">Pesquisa</span></div>
-      </div>
-      <div class="mod">
-        <div class="mod-num">TEMA 04</div>
-        <div class="mod-title">Escreva mais e melhor</div>
-        <div class="mod-desc">Do e-mail difícil ao artigo longo, com a sua voz preservada — não a voz robô da IA.</div>
-        <div class="mod-tags"><span class="tag">Escrita</span></div>
-      </div>
-      <div class="mod">
-        <div class="mod-num">TEMA 05</div>
-        <div class="mod-title">Crie no terminal</div>
-        <div class="mod-desc">Instale o Claude Code, configure o ambiente e construa seu primeiro mini-projeto.</div>
-        <div class="mod-tags"><span class="tag">Terminal</span><span class="tag">Setup</span></div>
-      </div>
-      <div class="mod">
-        <div class="mod-num">TEMA 06</div>
-        <div class="mod-title">Automatize tarefas chatas</div>
-        <div class="mod-desc">Conecte planilhas, e-mails e calendários pra a IA cuidar do operacional por você.</div>
-        <div class="mod-tags"><span class="tag">Automação</span></div>
-      </div>
-      <div class="mod">
-        <div class="mod-num">TEMA 07</div>
-        <div class="mod-title">Skills do seu jeito</div>
-        <div class="mod-desc">Empacote seus métodos pessoais como Skills reutilizáveis — uma vez feito, pra sempre usado.</div>
-        <div class="mod-tags"><span class="tag">Skills</span><span class="tag">Avançado</span></div>
-      </div>
-      <div class="mod">
-        <div class="mod-num">TEMA 08</div>
-        <div class="mod-title">Próximos passos</div>
-        <div class="mod-desc">Plano pessoal pra você continuar evoluindo depois que a imersão acabar.</div>
-        <div class="mod-tags"><span class="tag">Plano</span></div>
+    <div class="pricing reveal">
+      <div class="pricing-card">
+        <span class="price-badge">Condição exclusiva desta turma</span>
+        <ul>
+          <li>Encontro ao vivo 100% prático</li>
+          <li>Acesso a Skills (criação de conteúdo, planilhas e muito mais)</li>
+          <li>Acesso à gravação por 12 meses</li>
+          <li>Certificado de participação</li>
+        </ul>
+        <div class="bonus">
+          <span class="bonus-tag">Bônus</span>
+          <div class="bonus-text">Acesso <b>imediato</b> à gravação do workshop do dia <b>06/04</b> — já comece a se preparar pra aula ao vivo de <b>13/04</b>.</div>
+        </div>
+        <div class="price-box" style="margin-top:20px">
+          <div class="price-old">De R$ 297</div>
+          <div class="price-now"><b>R$ 100</b><span>à vista</span></div>
+          <div class="price-note">ou 12x de R$ 10,34</div>
+        </div>
+        <a href="https://pay.kiwify.com.br/9z7AF2U" class="btn btn-primary" style="width:100%;text-align:center;margin-top:20px;display:block">Garantir minha vaga</a>
       </div>
     </div>
   </section>
 
-  <section id="publico" class="band band--soft">
+  <!-- 8. SOBRE (mentor) -->
+  <section id="sobre">
     <div class="s-head reveal">
-      <div class="s-kicker">Para quem</div>
-      <h2 class="s-title">Pensada pra quem quer aplicar, não decorar.</h2>
+      <div class="s-kicker">Quem ensina</div>
+      <h2 class="s-title">Sobre o mentor.</h2>
     </div>
-    <div class="who reveal-stagger">
-      <div class="who-card">
-        <div class="ico">A</div>
-        <h4>Profissionais ocupados</h4>
-        <p>Quer terceirizar pra IA o que rouba seu tempo e voltar a focar no que importa.</p>
-      </div>
-      <div class="who-card">
-        <div class="ico">B</div>
-        <h4>Empreendedores</h4>
-        <p>Precisa fazer mais com menos gente — IA como a equipe que você ainda não tem.</p>
-      </div>
-      <div class="who-card">
-        <div class="ico">C</div>
-        <h4>Curiosos com pressa</h4>
-        <p>Já tentou ChatGPT, achou legal, mas nunca passou disso. Aqui você sai usando.</p>
+    <div class="mentor reveal">
+      <div class="mentor-avatar">L</div>
+      <div class="mentor-bio">
+        <p><b>Lucas Lopes</b> — já participou do time de tecnologia da <b>Algar Telecom</b>, <b>Board Academy</b> e outros grandes projetos.</p>
+        <p>Graduado em Economia com <b>MBA em Finanças pela FGV</b>, viu que automação e dados facilitavam a tomada de decisão — e desde então não parou.</p>
+        <p><b>+200 alunos e mentorados</b> em Agentes de I.A. Mais de <b>6 anos</b> fazendo projetos de tecnologia em grandes empresas.</p>
       </div>
     </div>
   </section>
 
+  <!-- 9. GARANTIA -->
+  <section id="garantia">
+    <div class="s-head reveal">
+      <div class="s-kicker">Garantia</div>
+      <h2 class="s-title">Sem risco pra você.</h2>
+    </div>
+    <div class="garantia-box reveal">
+      <div class="garantia-icon">🛡️</div>
+      <div>
+        <h3>7 dias de garantia incondicional</h3>
+        <p>Se nos primeiros 7 dias você sentir que o workshop não fez diferença no seu trabalho, basta pedir reembolso. Devolvemos 100% do valor, sem perguntas. O risco é todo nosso.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10. CERTIFICADO -->
+  <section id="certificado">
+    <div class="s-head reveal">
+      <div class="s-kicker">Certificado</div>
+      <h2 class="s-title">Certificado de conclusão.</h2>
+    </div>
+    <div class="cert-box reveal">
+      <div class="cert-icon">🎓</div>
+      <h3>Certificado de conclusão</h3>
+      <p>Ao final do workshop você recebe um certificado digital de participação na Imersão Claude — válido para comprovar horas complementares e desenvolvimento profissional.</p>
+    </div>
+  </section>
+
+  <!-- 11. FAQ -->
   <section id="faq" class="faq">
     <div class="s-head reveal">
       <div class="s-kicker">Dúvidas</div>
@@ -519,6 +713,7 @@ body::before{content:"";position:fixed;top:-50%;left:-50%;width:200%;height:200%
     <details><summary>Quanto tempo dura?</summary><div class="answer">Entre 1h30 e 2h ao vivo, mais material complementar pra você praticar depois do workshop.</div></details>
   </section>
 
+  <!-- CTA FINAL -->
   <section id="inscricao">
     <div class="final">
       <h2>Pronto pra trabalhar com <em>Claude do seu lado?</em></h2>
@@ -598,7 +793,7 @@ body::before{content:"";position:fixed;top:-50%;left:-50%;width:200%;height:200%
   revealEls.forEach(el=>revealIO.observe(el));
 
   // COUNTDOWN para 13/04 09:00
-  const target = new Date(new Date().getFullYear(),3,13,9,0,0).getTime();
+  const target = new Date(new Date().getFullYear(),3,13,19,0,0).getTime();
   const cdD=document.getElementById('cdD'),cdH=document.getElementById('cdH'),cdM=document.getElementById('cdM'),cdS=document.getElementById('cdS');
   function tick(){
     const diff = target - Date.now();
@@ -628,7 +823,7 @@ body::before{content:"";position:fixed;top:-50%;left:-50%;width:200%;height:200%
 
   // NAV ACTIVE conforme scroll
   const navLinks = document.querySelectorAll('.nav-links a');
-  const sections = ['sobre','modulos','publico','faq'].map(id=>document.getElementById(id));
+  const sections = ['promessa','conteudo','depoimentos','preco','faq'].map(id=>document.getElementById(id));
   const navIO = new IntersectionObserver((entries)=>{
     entries.forEach(e=>{
       if(e.isIntersecting){
