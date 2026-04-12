@@ -7,12 +7,13 @@
 <meta name="description" content="Uma imersão prática para você usar Claude no dia a dia: do primeiro prompt à automação do seu trabalho.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='110' fill='%23F04A1A'/%3E%3Ctext x='256' y='370' font-family='Inter,Arial,sans-serif' font-size='340' font-weight='900' text-anchor='middle' fill='white'%3EC%3C/text%3E%3C/svg%3E">
 <style>
 :root{
   --bg:#ECE7DD;
   --bg-soft:#F6F2EA;
+  --bg-alt:#E4DED3;
   --card:#DCD6C9;
   --card-2:#CFC8B8;
   --accent:#F24E1E;
@@ -21,7 +22,8 @@
   --ink-2:rgba(20,20,20,.68);
   --ink-3:rgba(20,20,20,.45);
   --line:rgba(20,20,20,.12);
-  --font:'Inter',system-ui,sans-serif;
+  --font:'DM Sans',system-ui,sans-serif;
+  --font-display:-apple-system,'SF Pro Display','Helvetica Neue',sans-serif;
   --r:14px;
   --r-sm:8px;
   --pad:clamp(20px,5vw,48px);
@@ -214,6 +216,67 @@ section{margin-bottom:120px;scroll-margin-top:120px}
 /* FOOTER */
 footer{padding:40px var(--pad);border-top:1px solid var(--line);text-align:center;font-size:12px;color:var(--ink-3);letter-spacing:.5px}
 footer b{color:var(--accent)}
+
+/* ===== GRAIN TEXTURE ===== */
+body::before{content:"";position:fixed;top:-50%;left:-50%;width:200%;height:200%;pointer-events:none;z-index:9999;opacity:.06;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-repeat:repeat;background-size:256px}
+
+/* ===== DISPLAY FONT ===== */
+.h1,.s-title,.final h2,.mod-title,.nps-card b,.price-now b{font-family:var(--font-display)}
+.h1{font-weight:700;letter-spacing:-1.5px;line-height:1.05;font-size:clamp(28px,4.5vw,48px)}
+.s-title{font-weight:700;letter-spacing:-2px}
+
+/* ===== FULL-BLEED SECTION BANDS ===== */
+.band{position:relative;margin-left:calc(-50vw + 50%);margin-right:calc(-50vw + 50%);padding:100px max(var(--pad), calc((100vw - 1200px)/2)) 120px}
+.band--dark{background:var(--ink);color:var(--bg)}
+.band--dark .s-kicker{color:var(--accent)}
+.band--dark .s-title{color:var(--bg)}
+.band--dark .s-sub{color:rgba(236,231,221,.65)}
+.band--dark .nps-card{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.08)}
+.band--dark .nps-card span{color:rgba(236,231,221,.5)}
+.band--dark .depo{background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.08)}
+.band--dark .depo-quote{color:var(--bg)}
+.band--dark .depo-author{border-color:rgba(255,255,255,.1)}
+.band--dark .depo-info b{color:var(--bg)}
+.band--dark .depo-info span{color:rgba(236,231,221,.5)}
+.band--dark .depo-stars{color:var(--accent)}
+
+.band--soft{background:var(--bg-soft)}
+
+/* ===== HERO ENTRANCE ===== */
+@keyframes heroSlideUp{from{opacity:0;transform:translateY(48px)}to{opacity:1;transform:none}}
+@keyframes heroCardIn{from{opacity:0;transform:translateX(40px) scale(.97)}to{opacity:1;transform:none}}
+.hero > div > *{opacity:0;animation:heroSlideUp .9s cubic-bezier(.16,1,.3,1) forwards}
+.hero > div > *:nth-child(1){animation-delay:.05s}
+.hero > div > *:nth-child(2){animation-delay:.2s}
+.hero > div > *:nth-child(3){animation-delay:.35s}
+.hero > div > *:nth-child(4){animation-delay:.5s}
+.hero > div > *:nth-child(5){animation-delay:.65s}
+.hero > .hero-card{opacity:0;animation:heroCardIn 1s cubic-bezier(.16,1,.3,1) .3s forwards}
+
+/* ===== MODULE CARD GLOW ON HOVER ===== */
+.mod{position:relative;transition:transform .25s,background .25s,box-shadow .25s;border:1px solid var(--line)}
+.mod:hover{background:var(--card-2);transform:translateY(-5px);border-color:var(--accent);box-shadow:0 8px 30px rgba(242,78,30,.12),0 0 0 1px var(--accent)}
+
+/* ===== CTA FINAL UPGRADE ===== */
+.final{background:var(--ink);color:var(--bg);border-radius:var(--r);padding:clamp(48px,8vw,96px) clamp(24px,4vw,48px);text-align:center;margin-bottom:60px;position:relative;overflow:hidden}
+.final::before{content:"";position:absolute;top:-60%;right:-20%;width:600px;height:600px;background:radial-gradient(circle,rgba(242,78,30,.18) 0%,transparent 70%);border-radius:50%;pointer-events:none}
+.final::after{content:"";position:absolute;bottom:-40%;left:-10%;width:400px;height:400px;background:radial-gradient(circle,rgba(242,78,30,.10) 0%,transparent 70%);border-radius:50%;pointer-events:none}
+.final h2{position:relative;z-index:1}
+.final p{position:relative;z-index:1}
+.final .btn-primary{position:relative;z-index:1;font-size:15px;padding:20px 36px}
+
+/* ===== STICKY CTA MOBILE ===== */
+.sticky-cta{display:none}
+@media(max-width:759px){
+  .sticky-cta{display:flex;position:fixed;bottom:0;left:0;right:0;z-index:100;background:rgba(20,20,20,.95);backdrop-filter:blur(14px);padding:14px 16px;border-top:1px solid rgba(242,78,30,.3);justify-content:center;transform:translateY(100%);transition:transform .4s cubic-bezier(.16,1,.3,1)}
+  .sticky-cta.show{transform:translateY(0)}
+  .sticky-cta .btn{width:100%;text-align:center;padding:18px;font-size:14px;letter-spacing:1.2px}
+  main{padding-bottom:180px}
+  .visit-pop{bottom:80px}
+}
+@media(min-width:760px){
+  .sticky-cta{display:none !important}
+}
 </style>
 </head>
 <body>
@@ -255,8 +318,8 @@ footer b{color:var(--accent)}
   <section class="hero" id="sobre">
     <div>
       <span class="kicker">Workshop I.A na prática · 13/04</span>
-      <h1 class="h1">Faça do Claude seu novo <em>funcionário.</em></h1>
-      <p class="lead">Como usar Claude, Claude Code e Cowork para automatizar, criar e lucrar com inteligência artificial.</p>
+      <h1 class="h1">Aprenda a usar inteligência artificial para trabalhar menos, produzir mais e <em>lucrar de verdade.</em></h1>
+      <p class="lead">O mesmo método que já formou +73 alunos vai te mostrar como usar Claude para automatizar tarefas, criar conteúdo e multiplicar seus resultados.</p>
       <div class="countdown" id="countdown">
         <div class="cd-box"><b id="cdD">--</b><span>Dias</span></div>
         <div class="cd-box"><b id="cdH">--</b><span>Horas</span></div>
@@ -285,14 +348,14 @@ footer b{color:var(--accent)}
         <div class="bonus-text">Acesso <b>imediato</b> à gravação do workshop do dia <b>06/04</b> — já comece a se preparar pra aula ao vivo de <b>13/04</b>.</div>
       </div>
       <div class="vagas" id="vagas">
-        <div class="vagas-head"><span>Vagas preenchidas</span><b id="vagasCount">0 / 30</b></div>
+        <div class="vagas-head"><span>Vagas preenchidas</span><b id="vagasCount">0 / 25</b></div>
         <div class="vagas-track"><div class="vagas-fill" id="vagasFill"></div></div>
-        <div class="vagas-note" id="vagasNote">Restam 18 vagas — não fica pra última hora</div>
+        <div class="vagas-note" id="vagasNote">Restam 13 vagas — não fica pra última hora</div>
       </div>
     </div>
   </section>
 
-  <section id="depoimentos">
+  <section id="depoimentos" class="band band--dark">
     <div class="s-head reveal">
       <div class="s-kicker">Prova social</div>
       <h2 class="s-title">Nota NPS 94 entre participantes.</h2>
@@ -414,7 +477,7 @@ footer b{color:var(--accent)}
     </div>
   </section>
 
-  <section id="publico">
+  <section id="publico" class="band band--soft">
     <div class="s-head reveal">
       <div class="s-kicker">Para quem</div>
       <h2 class="s-title">Pensada pra quem quer aplicar, não decorar.</h2>
@@ -452,7 +515,7 @@ footer b{color:var(--accent)}
   <section id="inscricao">
     <div class="final">
       <h2>Pronto pra trabalhar com <em>Claude do seu lado?</em></h2>
-      <p>Workshop dia 13/04 · 30 vagas · R$ 100 (de R$ 297)</p>
+      <p>Workshop dia 13/04 · 25 vagas · R$ 100 (de R$ 297)</p>
       <a href="https://pay.kiwify.com.br/9z7AF2U" class="btn btn-primary">Garantir minha vaga</a>
     </div>
   </section>
@@ -462,6 +525,10 @@ footer b{color:var(--accent)}
 <footer>
   @olucaslopesc — <b>Imersão Claude</b> · Todos os direitos reservados
 </footer>
+
+<div class="sticky-cta" id="stickyCta">
+  <a href="https://pay.kiwify.com.br/9z7AF2U" class="btn btn-primary">Garantir minha vaga — R$ 100</a>
+</div>
 
 <script>
   const bar=document.getElementById('bar');
@@ -474,7 +541,7 @@ footer b{color:var(--accent)}
   onScroll();
 
   // VAGAS — animação de contagem + barra
-  const TOTAL = 30;
+  const TOTAL = 25;
   let vagas = 12;
   const fill = document.getElementById('vagasFill');
   const count = document.getElementById('vagasCount');
@@ -599,6 +666,18 @@ footer b{color:var(--accent)}
   }
   setTimeout(showVisitor, 3500);
   setInterval(showVisitor, 9000);
+
+  // STICKY CTA mobile — aparece após scroll passar do hero
+  const stickyCta = document.getElementById('stickyCta');
+  const heroSection = document.querySelector('.hero');
+  if(stickyCta && heroSection){
+    const stickyIO = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        stickyCta.classList.toggle('show', !e.isIntersecting);
+      });
+    },{threshold:0});
+    stickyIO.observe(heroSection);
+  }
 
   // simula nova inscrição de tempos em tempos (efeito "ao vivo")
   setInterval(()=>{
